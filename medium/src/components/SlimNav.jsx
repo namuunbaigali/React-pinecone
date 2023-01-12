@@ -42,6 +42,7 @@ export default function SlimNav() {
         <li>
           <DropDown />
         </li>
+        <hr />
       </ul>
     </div>
   );

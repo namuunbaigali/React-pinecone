@@ -70,35 +70,37 @@ border: 1px solid #bb1abe;
   color: #bb1abe;
 border: 1px solid #bb1abe;
 }
-.dropdown-menu{
-    left: 20.33%;
-    right: 19.67%;
-    top: 33%;
-    bottom: 31.93%;
-  
-    background: #706E72;
-}
+
 .rounded-circle{
     width: 32px;
     height: 32px;
     right: 0px;
     top: 0px;
-  
-    background: rgba(255, 255, 255, 0.002);
-    box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.05);
-    border-radius: 16px;
-    background-color: red;
+    background: rgba(255, 255, 255, 0.002); 
+    border-radius: 50px;
+   background-color: red; 
 }
 
 .button{
   background-color: green;
-  color: white;
-}
-.become{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: rgba(117, 117, 117, 1);
-      color: red;
-     font-size: 14px;
+  color: rgba(255, 255, 255, 1);
+  border-color: rgb(26, 137, 23);
+  background: rgb(26, 137, 23);
+  border-radius:5px solid red ;
 }  
+.dropDown-button{
+  display: flex;
+  justify-content: center;
+  padding: 4px 12px 6px;
+  border-radius: 99em;
+  color: rgba(255, 255, 255, 1);
+  font-size: 14px;
+  width:300px;
+}
+.rounded-3{
+  width: 200px;
+}
+
+li{
+  list-style: none
+}

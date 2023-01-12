@@ -13,33 +13,33 @@ export default function DropDown() {
         <a
           onClick={toggleDropdown}
           href=""
-          className="d-block link-secondary text-decoration-none dropdown-toggle"
+          className="d-block  text-decoration-none dropdown-toggle"
           data-bs-toggle="dropdown"
         >
           <img src="" alt="" className="rounded-circle" />
         </a>
 
-        <div class="dropdown">
+        <div>
           <ul class="dropdown-menu">
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item d-flex justify-content-center " href="#">
                 Get started on Medium
               </a>
             </li>
-            <li>
+            <li className="dropDown-button">
               <button className="button rounded-3"> Sign up</button>
             </li>
-            <li>
-              <button className="rounded-3"> Sign in</button>
+            <li className="dropDown-button">
+              <button className="rounded-3 "> Sign in</button>
             </li>
             <hr />
-            <ul>
-              <li className="become">
+            <ul className=" px-5 ">
+              <li className="list-group-item text-danger d-flex justify-content-between ">
                 Become a member
                 <Star />
               </li>
-              <li>Become a member</li>
-              <li>Become a member</li>
+              <li className="list-group-item ">Become a member</li>
+              <li className="list-group-item">Become a member</li>
             </ul>
           </ul>
         </div>
