@@ -2,22 +2,24 @@ import React from "react";
 
 const hiceel = [
   "Resolutions",
-  "Decision Making",
-  "Psychology",
-  "Self Improvement",
+  "Decislogy",
+  "Self Iion Making",
+  "Psychomprovement",
   "Science",
 ];
 
 function App() {
   const renderListOfUserNames = (names) => {
-    return names.map((name) => <li>{name}</li>);
+    return names.map((name) => (
+      <li className="d-flex justify-content-between bg-secondary rounded-5">
+        {name}
+      </li>
+    ));
   };
 
   return (
     <div>
-      <ul className="d-flex justify-content-between bg-secondary rounded-5">
-        {renderListOfUserNames(hiceel)}
-      </ul>
+      <ul>{renderListOfUserNames(hiceel)}</ul>
     </div>
   );
 }

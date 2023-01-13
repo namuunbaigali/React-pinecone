@@ -9,7 +9,7 @@ const titleHeight = 50;
 
 const bodyColor = "#00ff";
 const headColor = "#ff0000";
-const speed = 500;
+const speed = 100;
 
 function Tile({ x, y, isHead }) {
   const style = {
