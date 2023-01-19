@@ -4,20 +4,20 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-export default function CategoriesCreate({ afterSubmit }) {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+export default function CategoryEdit({ afterEdit, category }) {
+  const [name, setName] = useState(category?.name);
+  const [description, setDescription] = useState(category?.description);
   const navigate = useNavigate();
 
   const submit = () => {
     let statusCode;
     fetch("https://demo-api-one.vercel.app/api/categories", {
-      method: "POST",
+      method: "PATCH",
       headers: {
         "Content-type": "application/json",
         Authorization: localStorage.getItem("token"),
       },
-      body: JSON.stringify({ name, description }),
+      body: JSON.stringify({ id: category?.id, name, description }),
     })
       .then((res) => {
         statusCode = res.status;
@@ -26,7 +26,7 @@ export default function CategoriesCreate({ afterSubmit }) {
       .then((data) => {
         if (statusCode === 200) {
           toast.success("amjilttai shinchilegdlee");
-          afterSubmit(data.body);
+          afterEdit(data.body);
         } else {
           if (statusCode === 403 || statusCode === 401) {
             navigate("/signout");

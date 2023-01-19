@@ -1,22 +1,23 @@
-import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import { Link, useNavigate } from 'react-router-dom';
-import { TOAST_CONFIG } from '../utils/configs';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { Link, useNavigate } from "react-router-dom";
+import { TOAST_CONFIG } from "../utils/configs";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Signin() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const submitSingIn = () => {
+    console.log(email, password);
     let status = 200;
-    fetch('https://demo-api-one.vercel.app/api/signin', {
-      method: 'POST',
+    fetch("https://demo-api-one.vercel.app/api/signin", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
     })
@@ -29,8 +30,8 @@ export default function Signin() {
           toast.error(data.message, TOAST_CONFIG);
         } else {
           toast.success(data.message, TOAST_CONFIG);
-          localStorage.setItem('token', data.body);
-          navigate('/signin/success');
+          localStorage.setItem("token", data.body);
+          navigate("/signin/success");
         }
       })
       .catch((err) => {
@@ -59,7 +60,9 @@ export default function Signin() {
                     setEmail(e.target.value);
                   }}
                 />
-                <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
+                <Form.Text className="text-muted">
+                  We'll never share your email with anyone else.
+                </Form.Text>
               </Form.Group>
 
               <Form.Group className="mb-3">
@@ -74,8 +77,12 @@ export default function Signin() {
                 />
               </Form.Group>
               <div className="d-flex justify-content-end">
-                <Link to={'/signup'}>
-                  <Button variant="outline-success" type="button" className="me-3">
+                <Link to={"/signup"}>
+                  <Button
+                    variant="outline-success"
+                    type="button"
+                    className="me-3"
+                  >
                     Sign up
                   </Button>
                 </Link>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import PostCreate from "../components/Blogs/PostCreate";
 import CategoriesCreate from "../components/Categories/CategoriesCreate";
+import CategoryEdit from "../components/Categories/CategoriesEdit";
 import CategoriesList from "../components/Categories/CategoriesList";
 import Heading from "../components/Heading";
 import DynamicModal from "../components/utils/DynamicModal";
@@ -10,13 +11,7 @@ export default function Catergories() {
   const [modalShow, setModalShow] = useState(false);
 
   const [categories, setCategories] = useState([]);
-
-  const handleClose = () => {
-    setModalShow(false);
-  };
-  const handleShow = () => {
-    setModalShow(true);
-  };
+  const [modalContent, setModalContent] = useState(<></>);
 
   useEffect(() => {
     fetch("https://demo-api-one.vercel.app/api/categories")
@@ -30,17 +25,47 @@ export default function Catergories() {
       });
   }, []);
 
+  const modalClose = () => {
+    setModalContent(<></>);
+    setModalShow(false);
+  };
+
+  const afterSubmit = (category) => {
+    setModalShow(false);
+    setCategories([...categories, category]);
+  };
+
+  const showCreateModal = () => {
+    setModalContent(<CategoriesCreate afterSubmit={afterSubmit} />);
+    setModalShow(true);
+  };
+
+  const afterEdit = (category) => {
+    modalClose();
+    let newCategories = categories.map((cat) => {
+      if (cat.id === category.id) {
+        return category;
+      }
+      return cat;
+    });
+    setCategories(newCategories);
+  };
+  const showEditModal = (category) => {
+    setModalContent(<CategoryEdit category={category} afterEdit={afterEdit} />);
+    setModalShow(true);
+  };
+
   return (
     <>
       <div className="container-sm body-container">
-        <Heading title="Catergories" handleShow={handleShow} />
-        <CategoriesList items={categories} />
+        <Heading title="Catergories" handleShow={showCreateModal} />
+        <CategoriesList items={categories} onEdit={showEditModal} />
       </div>
       <DynamicModal
+        content={modalContent}
         show={modalShow}
-        handleClose={handleClose}
+        handleClose={modalClose}
         title="Create category"
-        content={<CategoriesCreate />}
       />
     </>
   );

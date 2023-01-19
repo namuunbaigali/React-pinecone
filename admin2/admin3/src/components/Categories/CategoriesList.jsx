@@ -3,14 +3,11 @@ import { SlPencil, SlTrash } from "react-icons/sl";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const ListItem = ({ item, index }) => {
-  console.log(item);
-
+const ListItem = ({ item, index, onEdit }) => {
   const navigate = useNavigate();
   const [deleted, setDeleted] = useState(false);
   const deleteItem = () => {
     let statusCode;
-    console.log(item);
     fetch("https://demo-api-one.vercel.app/api/categories", {
       method: "DELETE",
       headers: {
@@ -46,7 +43,10 @@ const ListItem = ({ item, index }) => {
       <td>{item.name}</td>
       <td>{item.description}</td>
       <td style={{ whiteSpace: "nowrap" }}>
-        <button className="btn btn-sm btn-outline-primary me-2">
+        <button
+          className="btn btn-sm btn-outline-primary me-2"
+          onClick={() => onEdit(item)}
+        >
           <SlPencil />
         </button>
         <button onClick={deleteItem} className="btn btn-sm btn-outline-danger">
@@ -57,7 +57,7 @@ const ListItem = ({ item, index }) => {
   );
 };
 
-export default function CategoriesList({ items }) {
+export default function CategoriesList({ items, onEdit }) {
   return (
     <table className="table table-bordered table-hover">
       <thead>
@@ -70,11 +70,13 @@ export default function CategoriesList({ items }) {
       </thead>
       <tbody>
         {items?.map((item, index) => {
+          console.log(items);
           return (
             <ListItem
               item={item}
               index={index + 1}
               key={`list-item-${index}`}
+              onEdit={onEdit}
             />
           );
         })}
