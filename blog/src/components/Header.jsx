@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const [categories, setCategories] = useState([]);
@@ -13,37 +14,42 @@ export default function Header() {
       });
   }, []);
   return (
-    <header>
-      <div className="header-top">
-        <div className="container">
-          <div className="d-flex justify-content-between">
-            <div>
-              <a className="brand" href="/">
-                My Blog
-              </a>
-            </div>
-            <div>
-              <div className="search-btn">Search</div>
+    <Link to={"/header"}>
+      <header>
+        <div className="header-top">
+          <div className="container">
+            <div className="d-flex justify-content-between">
+              <div>
+                <a className="brand" href="/">
+                  My Blog
+                </a>
+              </div>
+              <div>
+                <div className="search-btn">Search</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="header-bottom">
-        <div className="container">
-          <nav>
-            <ul>
-              <li>
-                <a href="/">Нүүр</a>
-              </li>
-              {categories.map((item) => (
-                <li key={item.id}>
-                  <a href="/">{item.name}</a>
+        <div className="header-bottom">
+          <div className="container">
+            <nav>
+              <ul>
+                <li>
+                  <a href="/">Нүүр</a>
                 </li>
-              ))}
-            </ul>
-          </nav>
+                {categories.map((item) => (
+                  <li key={item.id}>
+                    <a href="/">{item.name}</a>
+                  </li>
+                ))}
+                <li>
+                  <Link to="/chatScreen"> CHat</Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </Link>
   );
 }
