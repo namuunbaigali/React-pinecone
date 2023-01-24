@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState, useRef } from "react";
 import dayjs from "dayjs";
+// import { Link } from "react-router-dom";
 
 export default function ChatScreen() {
   const intRef = useRef(null);
@@ -50,30 +51,34 @@ export default function ChatScreen() {
       });
   };
   return (
-    <div className="container">
-      <div className="row justify-content-center">
-        <div className="col-sm-6">
-          <div className="chat-container">
-            <div className="wrapper">
-              <ul>
-                {chats.map((chat) => (
-                  <ChatItem chat={chat} key={chat.id} />
-                ))}
-              </ul>
+    <>
+      {/* <Link to="/ChatScreen"> */}
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-sm-6">
+            <div className="chat-container">
+              <div className="wrapper">
+                <ul>
+                  {chats.map((chat) => (
+                    <ChatItem chat={chat} key={chat.id} />
+                  ))}
+                </ul>
+              </div>
+              <form onSubmit={send}>
+                <textarea
+                  value={text}
+                  onChange={(e) => {
+                    setText(e.target.value);
+                  }}
+                />
+                <button>Send </button>
+              </form>
             </div>
-            <form onSubmit={send}>
-              <textarea
-                value={text}
-                onChange={(e) => {
-                  setText(e.target.value);
-                }}
-              />
-              <button>Send </button>
-            </form>
           </div>
         </div>
       </div>
-    </div>
+      {/* </Link> */}
+    </>
   );
 }
 

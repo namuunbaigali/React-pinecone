@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { TOAST_CONFIG } from "../utils/configs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 export default function Signin() {
   const [email, setEmail] = useState("");
@@ -14,29 +15,44 @@ export default function Signin() {
   const submitSingIn = () => {
     console.log(email, password);
     let status = 200;
-    fetch("https://demo-api-one.vercel.app/api/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    })
+
+    axios
+      .post("https://demo-api-one.vercel.app/api/signin", {
+        email,
+        password,
+      })
       .then((res) => {
-        status = res.status;
-        return res.json();
+        console.log(res);
+        toast.success(res.data.message, TOAST_CONFIG);
+        localStorage.setItem("token", res.data.body);
+        navigate("/signin/success");
       })
-      .then((data) => {
-        if (status !== 200) {
-          toast.error(data.message, TOAST_CONFIG);
-        } else {
-          toast.success(data.message, TOAST_CONFIG);
-          localStorage.setItem("token", data.body);
-          navigate("/signin/success");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
+      .catch((e) => {
+        toast.error(e.response.data.message, TOAST_CONFIG);
       });
+    // fetch("https://demo-api-one.vercel.app/api/signin", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ email, password }),
+    // })
+    //   .then((res) => {
+    //     status = res.status;
+    //     return res.json();
+    //   })
+    //   .then((data) => {
+    //     if (status !== 200) {
+    //       toast.error(data.message, TOAST_CONFIG);
+    //     } else {
+    //       toast.success(data.message, TOAST_CONFIG);
+    //       localStorage.setItem("token", data.body);
+    //       navigate("/signin/success");
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   return (
