@@ -6,8 +6,8 @@ export default function Home() {
   const [articles, setArticle] = useState([]);
 
   useEffect(() => {
-    axios.get("https://demo-api-one.vercel.app/api/articles").then((res) => {
-      setArticle(res.data.body);
+    axios.get("http://localhost:8000/articles").then((res) => {
+      setArticle(res.data);
     });
   }, []);
 

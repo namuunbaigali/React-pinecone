@@ -7,17 +7,16 @@ export default function Articles() {
   const [article, setArticle] = useState({});
 
   useEffect(() => {
-    axios
-      .get("https://demo-api-one.vercel.app/api/articles/" + id)
-      .then((res) => {
-        setArticle(res.data.body);
-      });
+    axios.get("http://localhost:8000/articles/" + id).then((res) => {
+      setArticle(res.data);
+      console.log(res.data.text);
+    });
   }, []);
 
   return (
     <div className="container">
       <h1>{article.name}</h1>
-      <img style={{ maxwidth: "100%" }} src={article.imageUrl} alt="" />
+      <img style={{ maxWidth: "100%" }} src={article.imageUrl} alt="" />
       <p>{article.text}</p>
     </div>
   );
