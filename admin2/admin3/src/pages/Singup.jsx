@@ -24,7 +24,7 @@ export default function Singup() {
     // STATUS INFO
     let status = 200;
     axios
-      .post("https://demo-api-one.vercel.app/api/signup", time{
+      .post("https://demo-api-one.vercel.app/api/signup", {
         email,
         password,
         repassword,

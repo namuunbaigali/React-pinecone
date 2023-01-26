@@ -6,6 +6,7 @@ import CategoryEdit from "../components/Categories/CategoriesEdit";
 import CategoriesList from "../components/Categories/CategoriesList";
 import Heading from "../components/Heading";
 import DynamicModal from "../components/utils/DynamicModal";
+import axios from "axios";
 
 export default function Catergories() {
   const [modalShow, setModalShow] = useState(false);
@@ -14,14 +15,14 @@ export default function Catergories() {
   const [modalContent, setModalContent] = useState(<></>);
 
   useEffect(() => {
-    fetch("https://demo-api-one.vercel.app/api/categories")
-      .then((res) => res.json())
-      .then((data) => {
-        setCategories(data.body);
+    axios
+      .get("http://localhost:8000/articles")
+      .then((res) => {
+        setCategories(res.data);
       })
       .catch((err) => {
         console.log(err);
-        toast.error("Aldaa garlaa");
+        toast.error("aldaa garlaa");
       });
   }, []);
 

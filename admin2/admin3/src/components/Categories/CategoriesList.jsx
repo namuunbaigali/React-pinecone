@@ -2,40 +2,25 @@ import { useState } from "react";
 import { SlPencil, SlTrash } from "react-icons/sl";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const ListItem = ({ item, index, onEdit }) => {
   const navigate = useNavigate();
   const [deleted, setDeleted] = useState(false);
+
   const deleteItem = () => {
-    let statusCode;
-    fetch("https://demo-api-one.vercel.app/api/categories", {
-      method: "DELETE",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: localStorage.getItem("token"),
-      },
-      body: JSON.stringify({ id: item.id }),
-    })
-      .then((res) => {
-        statusCode = res.status;
-        return res.json();
-      })
-      .then((data) => {
-        if (statusCode === 200) {
-          toast.success("amjilttai ustgalaa");
-          setDeleted(true);
-        } else {
-          if (statusCode === 403 || statusCode === 401) {
-            navigate("/signout");
-          }
-          toast.error(data.message);
-        }
+    axios
+      .delete("http://localhost:8000/articles/" + item.id)
+      .then(() => {
+        toast.success("amjilttai ustgalaa");
+        setDeleted(true);
       })
       .catch((err) => {
         console.log(err);
         toast.error("aldaa garlaa");
       });
   };
+
   if (deleted) return <></>;
   return (
     <tr>

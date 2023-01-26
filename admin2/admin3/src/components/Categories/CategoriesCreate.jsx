@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function CategoriesCreate({ afterSubmit }) {
   const [name, setName] = useState("");
@@ -10,29 +11,14 @@ export default function CategoriesCreate({ afterSubmit }) {
   const navigate = useNavigate();
 
   const submit = () => {
-    let statusCode;
-    fetch("https://demo-api-one.vercel.app/api/categories", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: localStorage.getItem("token"),
-      },
-      body: JSON.stringify({ name, description }),
-    })
-      .then((res) => {
-        statusCode = res.status;
-        return res.json();
+    axios
+      .post("http://localhost:8000/articles/", {
+        name,
+        description,
       })
-      .then((data) => {
-        if (statusCode === 200) {
-          toast.success("amjilttai shinchilegdlee");
-          afterSubmit(data.body);
-        } else {
-          if (statusCode === 403 || statusCode === 401) {
-            navigate("/signout");
-          }
-          toast.error(data.message);
-        }
+      .then((res) => {
+        toast.success("amjilttai shinchilegdlee");
+        afterSubmit(res.data);
       })
       .catch((err) => {
         console.log(err);
