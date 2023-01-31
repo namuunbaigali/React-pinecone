@@ -34,7 +34,10 @@ export default function Header() {
           <nav>
             <ul>
               <li>
-                <a href="/">Нүүр</a>
+                <Link to={"/"}>Nvvr</Link>
+              </li>
+              <li>
+                <Link to={"/products"}>Products</Link>
               </li>
               {categories.map((item) => (
                 <li key={item.id === Articles.id}>

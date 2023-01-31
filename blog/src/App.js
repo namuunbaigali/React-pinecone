@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import ChatScreen from "./pages/ChatScreen";
 import Articles from "./components/Articles";
+import Products from "./pages/Products";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/" element={<Products />} />
         <Route path="/articles/:id" element={<Articles />} />
         <Route path="/ChatScreen" element={<ChatScreen />} />
       </Routes>
