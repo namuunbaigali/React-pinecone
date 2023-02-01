@@ -103,6 +103,16 @@ export default function Products() {
   return (
     <main>
       <div className="container">
+        <label className="form-label d-flex justify-content-start">
+          <input
+            type="range"
+            min="10000"
+            max="1000000"
+            step="50000"
+            onChange={(e) => e.target.value}
+          ></input>
+        </label>
+
         <div className="d-flex justify-content-end mb-4">
           <label>
             Хуудаслалт &nbsp;
